@@ -1,6 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+
+using Quiz.Environments;
+using Quiz.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseNpgsql(EnvironmentsSettings.GetDatabaseSettings())
+);
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
